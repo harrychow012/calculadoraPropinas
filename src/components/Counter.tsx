@@ -1,5 +1,5 @@
-import { Text, View } from "react-native";
-import { CalculatorButton } from "./CalculatorButton";
+import { Text, TouchableOpacity, View } from "react-native";
+import { globalStyles } from "../theme/globalStyles";
 
 type CounterProps = {
   people: number;
@@ -7,6 +7,7 @@ type CounterProps = {
   decrement: () => void;
   resetPeople: () => void;
 };
+
 export const Counter = ({
   people,
   increment,
@@ -21,16 +22,17 @@ export const Counter = ({
         marginTop: 20,
       }}
     >
-      <CalculatorButton label="-" onPress={decrement} />
+      <TouchableOpacity style={globalStyles.circleBtn} onPress={decrement}>
+        <Text style={globalStyles.circleBtn}>-</Text>
+      </TouchableOpacity>
 
-      <Text
-        onPress={resetPeople}
-        style={{ marginHorizontal: 20, fontSize: 20 }}
-      >
+      <Text onPress={resetPeople} style={globalStyles.counterNumber}>
         {people}
       </Text>
 
-      <CalculatorButton label="+" onPress={increment} />
+      <TouchableOpacity style={globalStyles.circleBtn} onPress={increment}>
+        <Text style={globalStyles.circleBtn}>+</Text>
+      </TouchableOpacity>
     </View>
   );
 };
