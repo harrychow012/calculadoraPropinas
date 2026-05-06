@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "react-native";
+import { globalStyles } from "../theme/globalStyles";
 import { CalculatorButton } from "./CalculatorButton";
 
 type KeypadProps = {
@@ -22,9 +23,9 @@ export const Keypad: React.FC<KeypadProps> = ({
   ];
 
   return (
-    <View style={{ padding: 20 }}>
+    <View style={globalStyles.keypadContainer}>
       {keys.map((row, i) => (
-        <View key={i} style={{ flexDirection: "row" }}>
+        <View key={i} style={globalStyles.row}>
           {row.map((key) => (
             <CalculatorButton
               key={key}
