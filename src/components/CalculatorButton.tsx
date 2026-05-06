@@ -1,5 +1,6 @@
 import * as Haptics from "expo-haptics";
 import { Text, TouchableOpacity } from "react-native";
+import { globalStyles } from "../theme/globalStyles";
 
 type CalculatorButtonProps = {
   label: string;
@@ -8,22 +9,27 @@ type CalculatorButtonProps = {
 
 export const CalculatorButton = ({ label, onPress }: CalculatorButtonProps) => {
   const handlePress = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    if (label === "C") {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+    } else if (label === "del") {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    } else {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    }
+
     onPress();
   };
+
   return (
     <TouchableOpacity
       onPress={handlePress}
-      style={{
-        flex: 1,
-        margin: 5,
-        backgroundColor: "#fff",
-        borderRadius: 10,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      style={[
+        globalStyles.button,
+        label === "C" && globalStyles.buttonDanger,
+        label === "del" && globalStyles.buttonSecondary,
+      ]}
     >
-      <Text style={{ fontSize: 18 }}>{label}</Text>
+      <Text style={globalStyles.buttonText}>{label}</Text>
     </TouchableOpacity>
   );
 };
