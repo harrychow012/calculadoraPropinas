@@ -1,11 +1,13 @@
 import * as Haptics from "expo-haptics";
 import { Text, TouchableOpacity } from "react-native";
+import { globalStyles } from "../theme/globalStyles";
+
 export const TipButton = ({
   value,
   selected,
   onPress,
 }: {
-  value: number;
+  value: number | string;
   selected: boolean;
   onPress: () => void;
 }) => {
@@ -17,17 +19,9 @@ export const TipButton = ({
   return (
     <TouchableOpacity
       onPress={handlePress}
-      style={{
-        flex: 1,
-        margin: 5,
-        backgroundColor: selected ? "#4caf50" : "#fff",
-        borderRadius: 10,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 10,
-      }}
+      style={[globalStyles.tipButton, selected && globalStyles.tipButtonActive]}
     >
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>{value}%</Text>
+      <Text style={globalStyles.tipButtonText}>{value}%</Text>
     </TouchableOpacity>
   );
 };
